@@ -11,12 +11,14 @@ public class MyEdgeNode {
     }
 
     public void setIndexOfNeighbour(int indexOfNeighbour) {
-        if (indexOfNeighbour > 0) {
+        if (indexOfNeighbour >= 0) {
             this.indexOfNeighbour = indexOfNeighbour;
         }else {
             this.indexOfNeighbour = -1;
         }
     }
+
+
 
     public float getWeight() {
         return weight;
