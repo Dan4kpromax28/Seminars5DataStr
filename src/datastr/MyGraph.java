@@ -3,6 +3,8 @@ package datastr;
 import datastr.nodes.MyEdgeNode;
 import datastr.nodes.MyVerticeNode;
 
+import java.util.ArrayList;
+
 public class MyGraph<Ttype> {
     private MyVerticeNode[] vertices;
     private final int GRAPH_DEFAULT_SIZE = 10;
@@ -102,12 +104,35 @@ public class MyGraph<Ttype> {
         for (int i = 0; i < counter; i++) {
             System.out.println(vertices[i].getElement());
             MyEdgeNode temp = vertices[i].getFirstEdgeNode();
-            while (temp!= null) {
+            while (temp != null) {
                 System.out.println(vertices[temp.getIndexOfNeighbour()].getElement() + " " + temp.getWeight() + "km; ");
                 temp = temp.getNext();
             }
             System.out.println();
         }
+    }
+
+
+    private ArrayList<MyVerticeNode> getNeighbours(Ttype element) throws Exception {
+        //todo not null
+        // vai virsotne eksiste
+        // ir ieguts index un caur to tad var atrast visus EgdeNode
+        // iet caur visiem edgeNode elementiem un katra dabut to virsotno
+        // Ielikt ieksa result saraksta MyVerticeNode o bjektu atrastajai kaiminu virsotnei
+        // jāatgriez
+        if (element == null) throw new Exception("Element is null");
+        int indexOfElement = searchVertices(element);
+        if (indexOfElement == -1) throw new Exception("There is no such vertice in the graph");
+        ArrayList<MyVerticeNode> result = new ArrayList<MyVerticeNode>();
+        MyVerticeNode verticeNode = vertices[indexOfElement];
+        MyEdgeNode tempE = verticeNode.getFirstEdgeNode();
+        while (tempE != null){
+           int indexOfNeighbour = tempE.getIndexOfNeighbour();
+           MyVerticeNode verticeNodeOfNeighbour = vertices[indexOfNeighbour];
+           result.add(verticeNodeOfNeighbour);
+            tempE = tempE.getNext();
+        }
+        return result;
     }
 
 
